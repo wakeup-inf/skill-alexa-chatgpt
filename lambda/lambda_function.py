@@ -8,12 +8,12 @@ from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model import Response
 
 # Set your OpenAI API key
-openai.api_key = "substitua-pela-sua-chave-da-openai"
+openai.api_key = "sua_chave_da_open_ai"
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-messages = [{"role": "system", "content": "Você é uma assistente muito útil. Por favor, responda de forma clara e concisa em Português do Brasil."}]
+messages = [{"role": "system", "content": "Jarvis é um chatbot pontual e muito simpático que ajuda as pessoas"}]
 
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
@@ -24,7 +24,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Bem vindo ao Chat 'Gepetê Quatro' da 'Open ei ai'! Qual a sua pergunta?"
+        speak_output = "Bem vindo ao SENAI 'Gepetê' da 'Open ei ai'! Qual a sua pergunta?"
 
         return (
             handler_input.response_builder
@@ -79,7 +79,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Saindo do modo Chat Gepetê."
+        speak_output = "Saindo do modo SENAI Gepetê."
 
         return (
             handler_input.response_builder
@@ -88,16 +88,15 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
         )
 
 def generate_gpt_response(query):
+    
     try:
         messages.append(
+            {"role": "system", "content": "Jarvis é um chatbot pontual e muito simpático que ajuda as pessoas"},
             {"role": "user", "content": query},
         )
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="ft:gpt-3.5-turbo-0613:zeros-e-um::8PrTlJrT",
             messages=messages,
-            max_tokens=1000,
-            n=1,
-            stop=None,
             temperature=0.5
         )
         reply = response['choices'][0]['message']['content'].strip()

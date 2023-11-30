@@ -91,7 +91,6 @@ def generate_gpt_response(query):
     
     try:
         messages.append(
-            {"role": "system", "content": "Jarvis é um chatbot pontual e muito simpático que ajuda as pessoas"},
             {"role": "user", "content": query},
         )
         response = openai.ChatCompletion.create(
